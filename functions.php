@@ -161,7 +161,7 @@ case co_amount:	  $sql2 = "select co_amount as title from cust_order_amount wher
 
  
 }
-mysql_select_db("isbpos", $dbconfig);
+mysql_select_db("client_isbpos", $dbconfig);
 $result = mysql_query($sql2);
 //mysql_select_db($database_dbconfig, $dbconfig);
 $rows = mysql_fetch_assoc($result);
@@ -180,7 +180,7 @@ case ws_price: 	  $sql2 = "select ws_price title from rates where shop_id ='$sho
 case sup_price:   $sql2 = "select sup_price title from rates where shop_id ='$shop_id' and prod_id ='$prod_id' and r_date ='$r_date'"; break;   
   
 }
-mysql_select_db("isbpos", $dbconfig);
+mysql_select_db("client_isbpos", $dbconfig);
 $result = mysql_query($sql2);
 //mysql_select_db($database_dbconfig, $dbconfig);
 $rows = mysql_fetch_assoc($result);
@@ -198,7 +198,7 @@ case cur_sale:  $sql3 = "select count(sales_id) as title from sales where sale_s
 case daily_sp_shop:	  $sql3 = "select COALESCE(SUM(s.amount_due),0) as title from sales s where s.sale_status = 2 and s.date_added like '$cur_date%'
 and s.shop_id = '$shop_id'"; break;
 }
-mysql_select_db("isbpos", $dbconfig);
+mysql_select_db("client_isbpos", $dbconfig);
 $result3 = mysql_query($sql3);
 //mysql_select_db($database_dbconfig, $dbconfig);
 $rows3 = mysql_fetch_assoc($result3);
@@ -228,7 +228,7 @@ SUM(CASE WHEN st_inout = 1 THEN weight ELSE 0 END)), 0) as title
  from stock s where s.shop_id = $shop_id and s.prod_id = $prod_id"; break;   
   
 }
-mysql_select_db("isbpos", $dbconfig);
+mysql_select_db("client_isbpos", $dbconfig);
 $result4 = mysql_query($sql4);
 //mysql_select_db($database_dbconfig, $dbconfig);
 $rows4 = mysql_fetch_assoc($result4);
@@ -249,7 +249,7 @@ case weight:   $sql5 = "select COALESCE(SUM(s.weight),0) as title
   
   
 }
-mysql_select_db("isbpos", $dbconfig);
+mysql_select_db("client_isbpos", $dbconfig);
 $result5 = mysql_query($sql5);
 //mysql_select_db($database_dbconfig, $dbconfig);
 $rows5 = mysql_fetch_assoc($result5);
@@ -264,7 +264,7 @@ $sql6 = "select s.sales_id,sd.prod_id,sd.qty,sd.weight,sd.sd_date,sd.sales_no,s.
 from sales s, sales_detail sd where sd.sd_status = 0 and s.sales_id = $sales_id and s.sale_status = 0
 and s.sales_id = sd.sales_id";
  
- mysql_select_db("isbpos", $dbconfig);
+ mysql_select_db("client_isbpos", $dbconfig);
 $result6 = mysql_query($sql6);
 //mysql_select_db($database_dbconfig, $dbconfig);
 while($rows6 = mysql_fetch_assoc($result6))
@@ -311,7 +311,7 @@ case out:   $sql7 = "select COALESCE((q1.co_amount - q2.cp_amount),0) as cust_ou
 (select sum(cp_amount) as cp_amount from cust_paid where cust_id = '$cust_id' and cp_status = 2) q2"; break;  
   
 }
-mysql_select_db("isbpos", $dbconfig);
+mysql_select_db("client_isbpos", $dbconfig);
 $result7 = mysql_query($sql7);
 //mysql_select_db($database_dbconfig, $dbconfig);
 $rows7 = mysql_fetch_assoc($result7);
@@ -329,7 +329,7 @@ case other:    $sql8 = "select other from cust_factor where cust_id = $cust_id a
 case mandi_fact:   $sql8 = "select mandi_fact as factor from cust_factor where cust_id = $cust_id and prod_id = $prod_id"; break;  
   
 }
-mysql_select_db("isbpos", $dbconfig);
+mysql_select_db("client_isbpos", $dbconfig);
 $result8 = mysql_query($sql8);
 //mysql_select_db($database_dbconfig, $dbconfig);
 $rows8 = mysql_fetch_assoc($result8);
@@ -351,7 +351,7 @@ SUM(CASE WHEN st_inout = 1 THEN weight ELSE 0 END)), 0) as title
  from stock s where s.shop_id = $shop_id and s.prod_id = $prod_id and st_date < '$date'"; break;    
   
 }
-mysql_select_db("isbpos", $dbconfig);
+mysql_select_db("client_isbpos", $dbconfig);
 $result9 = mysql_query($sql9);
 //mysql_select_db($database_dbconfig, $dbconfig);
 $rows9 = mysql_fetch_assoc($result9);
@@ -389,7 +389,7 @@ SUM(CASE WHEN st_inout = 1 THEN weight ELSE 0 END)), 0) as title
  and prod_id in (select prod_id from product where pcat_id = $pcat_id)"; break;
   
 }
-mysql_select_db("isbpos", $dbconfig);
+mysql_select_db("client_isbpos", $dbconfig);
 $result9 = mysql_query($sql9);
 //mysql_select_db($database_dbconfig, $dbconfig);
 $rows9 = mysql_fetch_assoc($result9);
