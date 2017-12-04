@@ -64,7 +64,7 @@ error_reporting(0);
 				
 				if($Result1)
 				{
-					$getSQLcn = "select * from client_isbpos.purchase where server_pur_id = '".$sauto_pur_id."' and upload = 2";
+					$getSQLcn = "select * from client_isbpos.purchase where server_pur_id = '".$sauto_pur_id."' and shop_id = '".$_SESSION["s_id"]."' and upload = 2";
 					echo $getSQLcn."<br>";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultgcn = mysql_query($getSQLcn, $dbconfig) or die(mysql_error());	 
@@ -72,7 +72,7 @@ error_reporting(0);
 					$cnauto_pur_id  = $rowgcn["pur_id"];
 
 					$updateSQL = "UPDATE isbpos.purchase set upload = 2, client_pur_id = '$cnauto_pur_id'
-					where pur_id = '$sauto_pur_id' ";
+					where pur_id = '$sauto_pur_id' and shop_id = '".$_SESSION["s_id"]."'";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultu = mysql_query($updateSQL, $dbconfig) or die(mysql_error());
 					
@@ -156,7 +156,7 @@ error_reporting(0);
 				
 				if($Result1)
 				{
-					$getSQLcn = "select * from isbpos.purchase where client_pur_id = '".$cauto_pur_id."' and upload = 2";
+					$getSQLcn = "select * from isbpos.purchase where client_pur_id = '".$cauto_pur_id."' and shop_id = '".$_SESSION["s_id"]."' and upload = 2";
 					echo $getSQLcn."<br>";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultgcn = mysql_query($getSQLcn, $dbconfig) or die(mysql_error());	 
@@ -164,7 +164,7 @@ error_reporting(0);
 					$cnauto_pur_id  = $rowgcn["pur_id"];
 
 					$updateSQL = "UPDATE client_isbpos.purchase set upload = 2, server_pur_id = '$cnauto_pur_id'
-					where pur_id = '$cauto_pur_id' ";
+					where pur_id = '$cauto_pur_id' and shop_id = '".$_SESSION["s_id"]."'";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultu = mysql_query($updateSQL, $dbconfig) or die(mysql_error());
 					

@@ -29,12 +29,31 @@ error_reporting(0);
 			$supload  		= $rowg["upload"];
 			if($rowg>0)
 			{
-				if($supload==1)
+				if($supload==2)
 				{
 					//echo "Added";
-					$updateSQLc = "UPDATE client_isbpos.rates set upload = 2 where server_rate_id = '$sauto_rate_id'";
+					$updateSQLc = "UPDATE client_isbpos.rates set upload = 2, sale_price='$sale_price'
+					where server_rate_id = '$sauto_rate_id'";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultc = mysql_query($updateSQLc, $dbconfig) or die(mysql_error());
+					
+					if($Resultc)
+					{
+						
+					$getSQLcn = "select * from isbpos.rates where client_rate_id = '".$cauto_rate_id."' and upload = 1";
+					echo $getSQLcn."<br>";
+					mysql_select_db($database_dbconfig, $dbconfig);
+					$Resultgcn = mysql_query($getSQLcn, $dbconfig) or die(mysql_error());	 
+					$rowgcn = mysql_fetch_assoc($Resultgcn);
+					$cnauto_rate_id  = $rowgcn["rate_id"];
+
+					echo $updateSQL = "UPDATE isbpos.rates set upload = 2, client_rate_id = '$cauto_rate_id'
+					where rate_id = '$sauto_rate_id' ";
+					mysql_select_db($database_dbconfig, $dbconfig);
+					$Resultu = mysql_query($updateSQL, $dbconfig) or die(mysql_error());
+					
+					}
+					
 				}
 				else
 				{
@@ -97,12 +116,31 @@ error_reporting(0);
 			$supload  		= $rowg["upload"];
 			if($rowg>0)
 			{
-				if($supload==1)
+				if($supload==2)
 				{
 					//echo "Added";
-					$updateSQLc = "UPDATE isbpos.rates set upload = 2 where client_rate_id = '$cauto_rate_id'";
+					$updateSQLc = "UPDATE isbpos.rates set upload = 2, sale_price='$sale_price'
+					where client_rate_id = '$cauto_rate_id'";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultc = mysql_query($updateSQLc, $dbconfig) or die(mysql_error());
+					
+					if($Resultc)
+					{
+						
+					$getSQLcn = "select * from client_isbpos.rates where server_rate_id = '".$sauto_rate_id."' and upload = 1";
+					echo $getSQLcn."<br>";
+					mysql_select_db($database_dbconfig, $dbconfig);
+					$Resultgcn = mysql_query($getSQLcn, $dbconfig) or die(mysql_error());	 
+					$rowgcn = mysql_fetch_assoc($Resultgcn);
+					$snauto_rate_id  = $rowgcn["rate_id"];
+
+					echo $updateSQL = "UPDATE client_isbpos.rates set upload = 2, server_rate_id = '$sauto_rate_id'
+					where rate_id = '$cauto_rate_id' ";
+					mysql_select_db($database_dbconfig, $dbconfig);
+					$Resultu = mysql_query($updateSQL, $dbconfig) or die(mysql_error());
+					
+					}
+					
 				}
 				else
 				{
@@ -131,44 +169,14 @@ error_reporting(0);
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultu = mysql_query($updateSQL, $dbconfig) or die(mysql_error());
 					
-					/* echo $updateSQLc = "UPDATE client_isbpos.rates set upload = 2 where server_rate_id = '$sauto_rate_id'";
-					mysql_select_db($database_dbconfig, $dbconfig);
-					$Resultc = mysql_query($updateSQLc, $dbconfig) or die(mysql_error()); */
+					
 				}
 				else
 				{
 					
 				}
 			}
-		}
+		} 
 		
-		/*if($rowg>0)
-		{
-			
-			//$insertSQL = "Update rates set  sale_price = '$sale_price',ws_price = '$ws_price' 
-			//where prod_id = '".$prod_id."' and shop_id = '".$shop_id."'";
-			$insertSQL = "Update rates set  sale_price = '$sale_price'
-			where prod_id = '".$prod_id."' and shop_id = '".$shop_id."'";
-			mysql_select_db($database_dbconfig, $dbconfig);
-			$Result1 = mysql_query($insertSQL, $dbconfig) or die(mysql_error());
-			echo "<span style='color:green;'>Rate Updated</span>";
- 		}
 		
-		else
-		{
-			
-	  // $insertSQL = "INSERT INTO rates(shop_id,r_date,prod_id,sale_price,ws_price ) 
-			//VALUES('$shop_id','$r_date','$prod_id' ,'$sale_price','$ws_price' )";
-			$insertSQL = "INSERT INTO rates(shop_id,r_date,prod_id,sale_price) 
-			VALUES('$shop_id','$r_date','$prod_id' ,'$sale_price' )";
-	mysql_select_db($database_dbconfig, $dbconfig);
-	$Result1 = mysql_query($insertSQL, $dbconfig) or die(mysql_error());	 
-			echo "<span style='color:green;'>Rate Added</span>";
- 		//echo "<script type='text/javascript'>alert('Data Successfully Saved!');</script>";	
-		//echo "<script>window.location='product.php'</script>";   
-		
-		}
-
-		
- */
 ?>

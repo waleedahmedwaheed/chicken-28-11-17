@@ -20,8 +20,8 @@ error_reporting(0);
 			
 			//$insertSQL = "Update rates set  sale_price = '$sale_price',ws_price = '$ws_price' 
 			//where prod_id = '".$prod_id."' and shop_id = '".$shop_id."'";
-			$insertSQL = "Update rates set  sale_price = '$sale_price'
-			where prod_id = '".$prod_id."' and shop_id = '".$shop_id."'";
+			$insertSQL = "Update rates set  sale_price = '$sale_price' , `server_rate_id` = null, upload = 1
+			where prod_id = '".$prod_id."' and shop_id = '".$shop_id."' and r_date='".$r_date."'";
 			mysql_select_db($database_dbconfig, $dbconfig);
 			$Result1 = mysql_query($insertSQL, $dbconfig) or die(mysql_error());
 			echo "<span style='color:green;'>Rate Updated</span>";
