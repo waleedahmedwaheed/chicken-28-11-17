@@ -31,7 +31,7 @@ error_reporting(0);
 			$bird_wgt_loss 	 = $rowgs["bird_wgt_loss"];
 			 //echo $sauto_rate_id."<br>";
 			 
-			$getSQL = "select * from client_isbpos.purchase where server_pur_id = '".$sauto_pur_id."'";
+			$getSQL = "select * from client_isbpos.purchase where server_pur_id = '".$sauto_pur_id."' and shop_id = '".$_SESSION["s_id"]."'";
 			echo $getSQL."<br>";
 			mysql_select_db($database_dbconfig, $dbconfig);
 			$Resultg = mysql_query($getSQL, $dbconfig) or die(mysql_error());	 
@@ -43,7 +43,7 @@ error_reporting(0);
 				if($supload==1)
 				{
 					//echo "Added";
-					$updateSQLc = "UPDATE client_isbpos.purchase set upload = 2 where server_pur_id = '$sauto_pur_id'";
+					$updateSQLc = "UPDATE client_isbpos.purchase set upload = 2 where server_pur_id = '$sauto_pur_id' and shop_id = '".$_SESSION["s_id"]."'";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultc = mysql_query($updateSQLc, $dbconfig) or die(mysql_error());
 				}
@@ -57,7 +57,7 @@ error_reporting(0);
 		echo $insertSQLs = "INSERT INTO client_isbpos.purchase
 		(pur_from,party_name,party_rate,mandi_rate,pur_date,shop_id,qty,weight,driver,vehicle,location,weight_loss,qty_loss,bird_wgt_loss,prod_id,p_status,upload,server_pur_id) 
 		VALUES
-	('$pur_from','$party_name','$party_rate','$mandi_rate','$pur_date','$shop_id','$qty','$weight','$driver','$vehicle','$location','$weight_loss','$qty_loss','$bird_wgt_loss','$prod_id','0','2','$sauto_pur_id')";
+	('$pur_from','$party_name','$party_rate','$mandi_rate','$pur_date','$shop_id','$qty','$weight','$driver','$vehicle','$location','$weight_loss','$qty_loss','$bird_wgt_loss','$prod_id','2','2','$sauto_pur_id')";
 				echo $insertSQLs."<br>";
 				mysql_select_db($database_dbconfig, $dbconfig);
 				$Result1 = mysql_query($insertSQLs, $dbconfig) or die(mysql_error());
@@ -76,13 +76,13 @@ error_reporting(0);
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultu = mysql_query($updateSQL, $dbconfig) or die(mysql_error());
 					
-					echo $insertSQL = "CALL client_isbpos.`PUR_INSERT`($cnauto_pur_id)";
-					mysql_select_db($database_dbconfig, $dbconfig);
-					$Result1 = mysql_query($insertSQL, $dbconfig) or die(mysql_error());
+					//echo $insertSQL = "CALL client_isbpos.`PUR_INSERT`($cnauto_pur_id)";
+					//mysql_select_db($database_dbconfig, $dbconfig);
+					//$Result1 = mysql_query($insertSQL, $dbconfig) or die(mysql_error());
 					
-					$insertSQL = "CALL client_isbpos.`pur_update`($cnauto_pur_id)";
-					mysql_select_db($database_dbconfig, $dbconfig);
-					$Result1 = mysql_query($insertSQL, $dbconfig) or die(mysql_error());
+					//$insertSQL = "CALL client_isbpos.`pur_update`($cnauto_pur_id)";
+					//mysql_select_db($database_dbconfig, $dbconfig);
+					//$Result1 = mysql_query($insertSQL, $dbconfig) or die(mysql_error());
 					
 					/* echo $updateSQLc = "UPDATE client_isbpos.rates set upload = 2 where server_rate_id = '$sauto_rate_id'";
 					mysql_select_db($database_dbconfig, $dbconfig);
@@ -123,7 +123,7 @@ error_reporting(0);
 			$bird_wgt_loss 	 = $rowgs["bird_wgt_loss"];
 			 //echo $sauto_rate_id."<br>";
 			 
-			$getSQL = "select * from isbpos.purchase where client_pur_id = '".$cauto_pur_id."'";
+			$getSQL = "select * from isbpos.purchase where client_pur_id = '".$cauto_pur_id."' and shop_id = '".$_SESSION["s_id"]."'";
 			echo $getSQL."<br>";
 			mysql_select_db($database_dbconfig, $dbconfig);
 			$Resultg = mysql_query($getSQL, $dbconfig) or die(mysql_error());	 
@@ -135,7 +135,7 @@ error_reporting(0);
 				if($supload==1)
 				{
 					//echo "Added";
-					$updateSQLc = "UPDATE isbpos.purchase set upload = 2 where client_pur_id = '$cauto_pur_id'";
+					$updateSQLc = "UPDATE isbpos.purchase set upload = 2 where client_pur_id = '$cauto_pur_id' and shop_id = '".$_SESSION["s_id"]."'";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultc = mysql_query($updateSQLc, $dbconfig) or die(mysql_error());
 				}
@@ -149,7 +149,7 @@ error_reporting(0);
 		echo $insertSQLs = "INSERT INTO isbpos.purchase
 		(pur_from,party_name,party_rate,mandi_rate,pur_date,shop_id,qty,weight,driver,vehicle,location,weight_loss,qty_loss,bird_wgt_loss,prod_id,p_status,upload,client_pur_id) 
 		VALUES
-	('$pur_from','$party_name','$party_rate','$mandi_rate','$pur_date','$shop_id','$qty','$weight','$driver','$vehicle','$location','$weight_loss','$qty_loss','$bird_wgt_loss','$prod_id','0','2','$cauto_pur_id')";
+	('$pur_from','$party_name','$party_rate','$mandi_rate','$pur_date','$shop_id','$qty','$weight','$driver','$vehicle','$location','$weight_loss','$qty_loss','$bird_wgt_loss','$prod_id','2','2','$cauto_pur_id')";
 				echo $insertSQLs."<br>";
 				mysql_select_db($database_dbconfig, $dbconfig);
 				$Result1 = mysql_query($insertSQLs, $dbconfig) or die(mysql_error());
@@ -168,13 +168,13 @@ error_reporting(0);
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultu = mysql_query($updateSQL, $dbconfig) or die(mysql_error());
 					
-					echo $insertSQL = "CALL isbpos.`PUR_INSERT`($cnauto_pur_id)";
-					mysql_select_db($database_dbconfig, $dbconfig);
-					$Result1 = mysql_query($insertSQL, $dbconfig) or die(mysql_error());
+					//echo $insertSQL = "CALL isbpos.`PUR_INSERT`($cnauto_pur_id)";
+					//mysql_select_db($database_dbconfig, $dbconfig);
+					//$Result1 = mysql_query($insertSQL, $dbconfig) or die(mysql_error());
 					
-					$insertSQL = "CALL isbpos.`pur_update`($cnauto_pur_id)";
-					mysql_select_db($database_dbconfig, $dbconfig);
-					$Result1 = mysql_query($insertSQL, $dbconfig) or die(mysql_error());
+					//$insertSQL = "CALL isbpos.`pur_update`($cnauto_pur_id)";
+					//mysql_select_db($database_dbconfig, $dbconfig);
+					//$Result1 = mysql_query($insertSQL, $dbconfig) or die(mysql_error());
 					
 					/* echo $updateSQLc = "UPDATE client_isbpos.rates set upload = 2 where server_rate_id = '$sauto_rate_id'";
 					mysql_select_db($database_dbconfig, $dbconfig);

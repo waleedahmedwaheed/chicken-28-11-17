@@ -375,7 +375,7 @@ SUM(CASE WHEN st_inout = 1 THEN weight ELSE 0 END)), 0) as title
  and st_date between '$date_from 00:00:00' and '$date_to 23:59:59'
  and prod_id in (select prod_id from product where pcat_id = $pcat_id)"; break;
 
- case weight_sales:   $sql9 = "select COALESCE(SUM(s.weight),0) as title
+ case weight_sales:  $sql9 = "select COALESCE(SUM(s.weight),0) as title
  from sales_detail s where  s.sd_status=2 and 
  s.sales_id in (select sa.sales_id from sales sa where sa.date_added between '$date_from 00:00:00' and '$date_from 23:59:59' and sa.shop_id = $shop_id)
  and prod_id in (select prod_id from product where pcat_id = $pcat_id)"; break;

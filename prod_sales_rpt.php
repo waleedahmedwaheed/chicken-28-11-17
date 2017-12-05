@@ -31,7 +31,14 @@ if(isset($_POST["search"]))
 <?php include("style.php"); ?>
 
 <script src="js/jquery.min.js"></script>
- 
+
+<style>
+th
+{
+	font-weight: bold;
+    font-size: 16px;
+}
+</style> 
  
 
 </head>
@@ -177,7 +184,7 @@ if(isset($_POST["search"]))
 									
 									<tr>
 									
-									<td> Product </td>
+									<th> Product </th>
 					
 						<?php
 							
@@ -205,9 +212,9 @@ if(isset($_POST["search"]))
 									
 									
 									<tr>
-										<td>
+										<th>
 											Opening Stock
-										</td>
+										</th>
 											<?php
 							
 				$selectSQL = "select * from product_category where pcat_status = 0 order by pcat_id";
@@ -219,18 +226,19 @@ if(isset($_POST["search"]))
 							{
 								$id				= $row1['pcat_id'];
 								$pcat_desc  	= $row1['pcat_desc'];
+								$openwgt 		= get_openprodstock(weight_open,$shop_id,$id,$date_from,$date_to,$dbconfig);
 						?>
 				
 										<td>
-											<?php echo $openwgt = get_openprodstock(weight_open,$shop_id,$id,$date_from,$date_to,$dbconfig); ?>
+											<?php echo number_format($openwgt,3); ?>
 										</td>
 							<?php } ?>				
 									</tr>
 									
 									<tr>
-										<td>
+										<th>
 											Sale
-										</td>
+										</th>
 											<?php
 							
 				$selectSQL = "select * from product_category where pcat_status = 0 order by pcat_id";
@@ -242,18 +250,19 @@ if(isset($_POST["search"]))
 							{
 								$id				= $row1['pcat_id'];
 								$pcat_desc  	= $row1['pcat_desc'];
+								$salewgt 		= get_openprodstock(weight_sales,$shop_id,$id,$date_from,$date_to,$dbconfig);
 						?>
 				
 										<td>
-											<?php echo $salewgt = get_openprodstock(weight_sales,$shop_id,$id,$date_from,$date_to,$dbconfig); ?>
+											<?php echo number_format($salewgt,3); ?>
 										</td>
 							<?php } ?>				
 									</tr>
 									 
 									 <tr>
-										<td>
+										<th>
 											Loss
-										</td>
+										</th>
 											<?php
 							
 				$selectSQL = "select * from product_category where pcat_status = 0 order by pcat_id";
@@ -265,18 +274,19 @@ if(isset($_POST["search"]))
 							{
 								$id				= $row1['pcat_id'];
 								$pcat_desc  	= $row1['pcat_desc'];
+								$losswgt 		= get_openprodstock(weight_loss,$shop_id,$id,$date_from,$date_to,$dbconfig);
 						?>
 				
 										<td>
-											<?php echo $losswgt = get_openprodstock(weight_loss,$shop_id,$id,$date_from,$date_to,$dbconfig); ?>
+											<?php echo number_format($losswgt,3); ?>
 										</td>
 							<?php } ?>				
 									</tr>
 
 									<tr>
-										<td>
+										<th>
 											Closing Stock
-										</td>
+										</th>
 											<?php
 							
 				$selectSQL = "select * from product_category where pcat_status = 0 order by pcat_id";
@@ -288,19 +298,20 @@ if(isset($_POST["search"]))
 							{
 								$id				= $row1['pcat_id'];
 								$pcat_desc  	= $row1['pcat_desc'];
+								$closwgt = get_openprodstock(weight_open,$shop_id,$id,$date_from,$date_to,$dbconfig) - 
+		(get_openprodstock(weight_sales,$shop_id,$id,$date_from,$date_to,$dbconfig) + get_openprodstock(weight_loss,$shop_id,$id,$date_from,$date_to,$dbconfig));
 						?>
 				
 										<td>
-		<?php echo $closwgt = get_openprodstock(weight_open,$shop_id,$id,$date_from,$date_to,$dbconfig) - 
-		(get_openprodstock(weight_sales,$shop_id,$id,$date_from,$date_to,$dbconfig) + get_openprodstock(weight_loss,$shop_id,$id,$date_from,$date_to,$dbconfig)); ?>
+		<?php echo number_format($closwgt,3); ?>
 										</td>
 							<?php } ?>				
 									</tr>
 									
 									<tr>
-										<td>
+										<th>
 											Total Amount
-										</td>
+										</th>
 											<?php
 							
 				$selectSQL = "select * from product_category where pcat_status = 0 order by pcat_id";
@@ -312,10 +323,11 @@ if(isset($_POST["search"]))
 							{
 								$id				= $row1['pcat_id'];
 								$pcat_desc  	= $row1['pcat_desc'];
+								$price = get_openprodstock(weight_price,$shop_id,$id,$date_from,$date_to,$dbconfig);
 						?>
 				
 										<td>
-		<?php echo $price = number_format(get_openprodstock(weight_price,$shop_id,$id,$date_from,$date_to,$dbconfig),2); ?>
+								<?php echo number_format($price,2); ?>
 										</td>
 							<?php 
 							
@@ -327,14 +339,17 @@ if(isset($_POST["search"]))
 									
 									<tr>
 										<td>
-											Grand Total
+											 
 										</td>
 											<?php
 							
 						?>
 				
 										<td colspan="3">
-		<?php echo number_format($total_price,2); ?>
+		<?php
+							
+				
+						?>
 										</td>
 							 	
 									</tr>

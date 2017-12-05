@@ -20,7 +20,7 @@ error_reporting(0);
 			 $sale_price	 = $rowgs["sale_price"];
 			 //echo $sauto_rate_id."<br>";
 			 
-			$getSQL = "select * from client_isbpos.rates where server_rate_id = '".$sauto_rate_id."'";
+			$getSQL = "select * from client_isbpos.rates where server_rate_id = '".$sauto_rate_id."' and shop_id = '".$_SESSION["s_id"]."'";
 			echo $getSQL."<br>";
 			mysql_select_db($database_dbconfig, $dbconfig);
 			$Resultg = mysql_query($getSQL, $dbconfig) or die(mysql_error());	 
@@ -33,14 +33,14 @@ error_reporting(0);
 				{
 					//echo "Added";
 					$updateSQLc = "UPDATE client_isbpos.rates set upload = 2, sale_price='$sale_price'
-					where server_rate_id = '$sauto_rate_id'";
+					where server_rate_id = '$sauto_rate_id' and shop_id = '".$_SESSION["s_id"]."'";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultc = mysql_query($updateSQLc, $dbconfig) or die(mysql_error());
 					
 					if($Resultc)
 					{
 						
-					$getSQLcn = "select * from isbpos.rates where client_rate_id = '".$cauto_rate_id."' and upload = 1";
+					$getSQLcn = "select * from isbpos.rates where client_rate_id = '".$cauto_rate_id."' and upload = 1 and shop_id = '".$_SESSION["s_id"]."'";
 					echo $getSQLcn."<br>";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultgcn = mysql_query($getSQLcn, $dbconfig) or die(mysql_error());	 
@@ -48,7 +48,7 @@ error_reporting(0);
 					$cnauto_rate_id  = $rowgcn["rate_id"];
 
 					echo $updateSQL = "UPDATE isbpos.rates set upload = 2, client_rate_id = '$cauto_rate_id'
-					where rate_id = '$sauto_rate_id' ";
+					where rate_id = '$sauto_rate_id' and shop_id = '".$_SESSION["s_id"]."'";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultu = mysql_query($updateSQL, $dbconfig) or die(mysql_error());
 					
@@ -70,7 +70,7 @@ error_reporting(0);
 				
 				if($Result1)
 				{
-					$getSQLcn = "select * from client_isbpos.rates where server_rate_id = '".$sauto_rate_id."' and upload = 2";
+					$getSQLcn = "select * from client_isbpos.rates where server_rate_id = '".$sauto_rate_id."' and upload = 2 and shop_id = '".$_SESSION["s_id"]."'";
 					echo $getSQLcn."<br>";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultgcn = mysql_query($getSQLcn, $dbconfig) or die(mysql_error());	 
@@ -78,7 +78,7 @@ error_reporting(0);
 					$cnauto_rate_id  = $rowgcn["rate_id"];
 
 					echo $updateSQL = "UPDATE isbpos.rates set upload = 2, client_rate_id = '$cnauto_rate_id'
-					where rate_id = '$sauto_rate_id' ";
+					where rate_id = '$sauto_rate_id' and shop_id = '".$_SESSION["s_id"]."'";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultu = mysql_query($updateSQL, $dbconfig) or die(mysql_error());
 					
@@ -107,7 +107,7 @@ error_reporting(0);
 			 $sale_price	 = $rowgs["sale_price"];
 			 //echo $sauto_rate_id."<br>";
 			 
-			$getSQL = "select * from isbpos.rates where client_rate_id = '".$cauto_rate_id."'";
+			$getSQL = "select * from isbpos.rates where client_rate_id = '".$cauto_rate_id."' and shop_id = '".$_SESSION["s_id"]."'";
 			echo $getSQL."<br>";
 			mysql_select_db($database_dbconfig, $dbconfig);
 			$Resultg = mysql_query($getSQL, $dbconfig) or die(mysql_error());	 
@@ -120,14 +120,14 @@ error_reporting(0);
 				{
 					//echo "Added";
 					$updateSQLc = "UPDATE isbpos.rates set upload = 2, sale_price='$sale_price'
-					where client_rate_id = '$cauto_rate_id'";
+					where client_rate_id = '$cauto_rate_id' and shop_id = '".$_SESSION["s_id"]."'";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultc = mysql_query($updateSQLc, $dbconfig) or die(mysql_error());
 					
 					if($Resultc)
 					{
 						
-					$getSQLcn = "select * from client_isbpos.rates where server_rate_id = '".$sauto_rate_id."' and upload = 1";
+					$getSQLcn = "select * from client_isbpos.rates where server_rate_id = '".$sauto_rate_id."' and upload = 1 and shop_id = '".$_SESSION["s_id"]."'";
 					echo $getSQLcn."<br>";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultgcn = mysql_query($getSQLcn, $dbconfig) or die(mysql_error());	 
@@ -135,7 +135,7 @@ error_reporting(0);
 					$snauto_rate_id  = $rowgcn["rate_id"];
 
 					echo $updateSQL = "UPDATE client_isbpos.rates set upload = 2, server_rate_id = '$sauto_rate_id'
-					where rate_id = '$cauto_rate_id' ";
+					where rate_id = '$cauto_rate_id' and shop_id = '".$_SESSION["s_id"]."'";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultu = mysql_query($updateSQL, $dbconfig) or die(mysql_error());
 					
@@ -157,7 +157,7 @@ error_reporting(0);
 				
 				if($Result1)
 				{
-					$getSQLcn = "select * from isbpos.rates where client_rate_id = '".$cauto_rate_id."' and upload = 2";
+					$getSQLcn = "select * from isbpos.rates where client_rate_id = '".$cauto_rate_id."' and upload = 2 and shop_id = '".$_SESSION["s_id"]."'";
 					echo $getSQLcn."<br>";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultgcn = mysql_query($getSQLcn, $dbconfig) or die(mysql_error());	 
@@ -165,7 +165,7 @@ error_reporting(0);
 					$cnauto_rate_id  = $rowgcn["rate_id"];
 
 					echo $updateSQL = "UPDATE client_isbpos.rates set upload = 2, server_rate_id = '$cnauto_rate_id'
-					where rate_id = '$cauto_rate_id' ";
+					where rate_id = '$cauto_rate_id' and shop_id = '".$_SESSION["s_id"]."'";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultu = mysql_query($updateSQL, $dbconfig) or die(mysql_error());
 					

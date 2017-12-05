@@ -97,7 +97,8 @@ error_reporting(0);
 			$prod_id	 	 = $rowgs["prod_id"];
 			
 			
-			$getSQL = "select * from client_isbpos.ppr_products where server_pprp_id = '".$sauto_pprp_id."'";
+			$getSQL = "select * from client_isbpos.ppr_products where server_pprp_id = '".$sauto_pprp_id."' and ppr_id in
+			(Select ppr_id from client_isbpos.prod_processed where shop_id = '".$_SESSION["s_id"]."')";
 			echo $getSQL."<br>";
 			mysql_select_db($database_dbconfig, $dbconfig);
 			$Resultg = mysql_query($getSQL, $dbconfig) or die(mysql_error());	 
@@ -120,7 +121,7 @@ error_reporting(0);
 			}
 			else
 			{
-				echo $sql2 = "SELECT ppr_id from client_isbpos.prod_processed where server_ppr_id = '$ppr_id'";
+				echo $sql2 = "SELECT ppr_id from client_isbpos.prod_processed where server_ppr_id = '$ppr_id' and shop_id = '".$_SESSION["s_id"]."'";
 				mysql_select_db($database_dbconfig, $dbconfig);
 				$Resultgsa = mysql_query($sql2, $dbconfig) or die(mysql_error());	 
 				$rowgsa = mysql_fetch_assoc($Resultgsa);
@@ -134,7 +135,8 @@ error_reporting(0);
 					
 					if($Result1)
 				{
-					$getSQLcn = "select * from client_isbpos.ppr_products where server_pprp_id = '".$sauto_pprp_id."' and upload = 3 ";
+					$getSQLcn = "select * from client_isbpos.ppr_products where server_pprp_id = '".$sauto_pprp_id."' and upload = 3 and ppr_id in
+					(Select ppr_id from client_isbpos.prod_processed where shop_id = '".$_SESSION["s_id"]."')";
 					echo $getSQLcn."<br>";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultgcn = mysql_query($getSQLcn, $dbconfig) or die(mysql_error());	 
@@ -142,7 +144,8 @@ error_reporting(0);
 					$cnauto_pprp_id  = $rowgcn["pprp_id"];
 
 					$updateSQL = "UPDATE isbpos.ppr_products set upload = 3, client_pprp_id = '$cnauto_pprp_id'
-					where pprp_id = '$sauto_pprp_id' and ppr_id = '".$ppr_id."'";
+					where pprp_id = '$sauto_pprp_id' and ppr_id = '".$ppr_id."' and ppr_id in
+			(Select ppr_id from isbpos.prod_processed where shop_id = '".$_SESSION["s_id"]."')";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultu = mysql_query($updateSQL, $dbconfig) or die(mysql_error());					
 					
@@ -232,7 +235,8 @@ error_reporting(0);
 			$prod_id	 	 = $rowgs["prod_id"];
 			
 		
-			 $getSQL = "select * from isbpos.ppr_products where client_pprp_id = '".$cauto_pprp_id."'";
+			 $getSQL = "select * from isbpos.ppr_products where client_pprp_id = '".$cauto_pprp_id."' and ppr_id in
+			(Select ppr_id from isbpos.prod_processed where shop_id = '".$_SESSION["s_id"]."')";
 			echo $getSQL."<br>";
 			mysql_select_db($database_dbconfig, $dbconfig);
 			$Resultg = mysql_query($getSQL, $dbconfig) or die(mysql_error());	 
@@ -245,14 +249,16 @@ error_reporting(0);
 				{
 					echo "Added";
 					$updateSQLc = "UPDATE isbpos.ppr_products set upload = 2,r_qty='$r_qty',r_weight='$r_weight',pprp_status=4
-					where client_pprp_id = '$cauto_pprp_id' ";
+					where client_pprp_id = '$cauto_pprp_id' and ppr_id in
+			(Select ppr_id from isbpos.prod_processed where shop_id = '".$_SESSION["s_id"]."')";
 					mysql_select_db($database_dbconfig, $dbconfig);
 					$Resultc = mysql_query($updateSQLc, $dbconfig) or die(mysql_error());
 					
 					if($Resultc)
 					{
 						$updateSQL = "UPDATE client_isbpos.ppr_products set upload = 2, pprp_status = 2
-						where pprp_id = '".$cauto_pprp_id."'";
+						where pprp_id = '".$cauto_pprp_id."' and ppr_id in
+			(Select ppr_id from client_isbpos.prod_processed where shop_id = '".$_SESSION["s_id"]."')";
 						mysql_select_db($database_dbconfig, $dbconfig);
 						$Resultu = mysql_query($updateSQL, $dbconfig) or die(mysql_error());
 					}

@@ -82,7 +82,7 @@ error_reporting(0);
 				$price		= $rowgs["price"];
 				//$sales_id	= get_title(sales_id,$sales_no_,$dbconfig);
 				
-				echo $sql2 = "SELECT sales_id from isbpos.sales where sales_no = '$sales_no_'";
+				echo $sql2 = "SELECT sales_id from isbpos.sales where sales_no = '$sales_no_' and shop_id = '".$_SESSION["s_id"]."'";
 				mysql_select_db($database_dbconfig, $dbconfig);
 				$Resultgsa = mysql_query($sql2, $dbconfig) or die(mysql_error());	 
 				$rowgsa = mysql_fetch_assoc($Resultgsa);
