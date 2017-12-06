@@ -18,7 +18,7 @@ $shop_ho = get_title(shop_ho,$_SESSION["s_id"],$dbconfig);
 		$mr_rate	 	 = $rowg["mr_rate"];
 		$cur_date	 	 = $rowg["cur_date"];
 		$shop_id	 	 = $rowg["shop_id"];
-		$sale_rate 	 	 = $rowg["mr_rate"];
+		$sale_rate 	 	 = $rowg["sale_rate"];
 	
 	}
 	

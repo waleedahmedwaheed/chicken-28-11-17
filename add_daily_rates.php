@@ -16,9 +16,9 @@ error_reporting(0);
 	
 
 if($opt=="update")
-{
+{			
 	$insertSQL = "Update daily_rates set sale_rate = '$sale_rate',mr_rate = '$mr_rate',shop_id='$shop_id',
-	cur_date='$cur_date'
+	cur_date='$cur_date', `server_mr_id` = null, upload = 1
 	where mr_id = '$mr_id'";
 	mysql_select_db($database_dbconfig, $dbconfig);
 	$Result1 = mysql_query($insertSQL, $dbconfig) or die(mysql_error());
