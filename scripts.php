@@ -413,3 +413,92 @@ Highcharts.chart('container4', {
 
 });
 		</script>
+		
+		<script>
+		
+		setInterval(function() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+         if (request.readyState == 4 && request.status == 200) {
+            console.log(request.responseText);
+         }
+      }
+    request.open('GET', 'server_rates.php', true);
+    request.send();
+
+	}, 60 * 1000);
+		
+		setInterval(function() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+         if (request.readyState == 4 && request.status == 200) {
+            console.log(request.responseText);
+         }
+      }
+    request.open('GET', 'server_live_rates.php', true);
+    request.send();
+
+	}, 60 * 1000);
+		
+		setInterval(function() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+         if (request.readyState == 4 && request.status == 200) {
+            console.log(request.responseText);
+         }
+      }
+    request.open('GET', 'server_purchase.php', true);
+    request.send();
+
+	}, 60 * 1000);
+		
+		setInterval(function() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+         if (request.readyState == 4 && request.status == 200) {
+            console.log(request.responseText);
+         }
+      }
+    request.open('GET', 'server_live.php', true);
+    request.send();
+
+	}, 60 * 1000);
+		
+		setInterval(function() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+         if (request.readyState == 4 && request.status == 200) {
+            console.log(request.responseText);
+         }
+      }
+    request.open('GET', 'server_chiller.php', true);
+    request.send();
+
+	}, 60 * 1000);
+		
+		setInterval(function() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+         if (request.readyState == 4 && request.status == 200) {
+            console.log(request.responseText);
+         }
+      }
+    request.open('GET', 'server_sales.php', true);
+    request.send();
+
+	}, 60 * 1000);
+	
+	setInterval(function() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+         if (request.readyState == 4 && request.status == 200) {
+            console.log(request.responseText);
+         }
+      }
+    request.open('GET', 'server_loss.php', true);
+    request.send();
+
+	}, 60 * 1000);
+		
+		</script>
+		
